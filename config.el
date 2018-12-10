@@ -6,17 +6,6 @@
 (setq company-idle-delay 0.2
       company-minimum-prefix-length 3)
 
-
-(eval-after-load 'yasnippet
-  '(progn
-     (define-key yas-keymap (kbd "TAB") nil)
-     (define-key yas-keymap (kbd "C-o") 'yas-next-field-or-maybe-expand)))
-
-
-(define-key yas-minor-mode-map (kbd "<tab>") nil)
-(define-key yas-minor-mode-map (kbd "TAB") nil)
-(define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
-
 ;;; Re-define the german umalut keys
 (global-set-key "ö" "[")
 (global-set-key "ä" "]")
@@ -24,7 +13,6 @@
 (global-set-key (kbd "C-ä") "}")
 (global-set-key (kbd "M-ö") "ö")
 (global-set-key (kbd "M-ä") "ä")
-
 
 ;;; Simulates vis change inside
 (require 'expand-region)
