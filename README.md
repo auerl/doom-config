@@ -7,14 +7,13 @@ Install DOOM
 
 ```bash
 sudo apt-get install emacs
-git clone https://github.com/hlissner/doom-emacs ~/.emacs.d
+git clone -b develop https://github.com/hlissner/doom-emacs ~/.emacs.d
 ```
 
 Setup DOOM
 
 ```bash
-cd ~/.emacs.d
-make quickstart
+~/.emacs.d/bin/doom quickstart
 mkdir ~/.doom.d
 cp init.el config.el ~/.doom.d/
 ```
