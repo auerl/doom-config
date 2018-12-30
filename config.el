@@ -7,12 +7,20 @@
       company-minimum-prefix-length 3)
 
 ;;; Re-define the german umalut keys
-(global-set-key "ö" "[")
-(global-set-key "ä" "]")
-(global-set-key (kbd "C-ö") "{")
-(global-set-key (kbd "C-ä") "}")
-(global-set-key (kbd "M-ö") "ö")
-(global-set-key (kbd "M-ä") "ä")
+;; (global-set-key "ö" "[")
+;; (global-set-key "ä" "]")
+;; (global-set-key (kbd "C-ö") "{")
+;; (global-set-key (kbd "C-ä") "}")
+;; (global-set-key (kbd "M-ö") "ö")
+;; (global-set-key (kbd "M-ä") "ä")
+
+;;; Configure ultiple cursors mode
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+
 
 ;;; Simulates vis change inside
 (require 'expand-region)
