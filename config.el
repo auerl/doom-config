@@ -14,12 +14,15 @@
 ;; (global-set-key (kbd "M-ö") "ö")
 ;; (global-set-key (kbd "M-ä") "ä")
 
+;; Make dead grave key work for Thinkpad X220 (DE)
+(global-set-key [S-dead-grave] "`")
+
 ;;; Configure ultiple cursors mode
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
+(global-set-key (kbd "C-S-c C-S-n") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-S-c C-S-p") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-c C-S-a") 'mc/mark-all-like-this)
 
 
 ;;; Simulates vis change inside
