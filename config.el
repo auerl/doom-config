@@ -1,4 +1,6 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
+(set-face-attribute 'default nil :font "Ubuntu Mono 12")
+
 
 (add-to-list 'initial-frame-alist '(fullscreen . maximized))
 (add-to-list 'default-frame-alist '(fullscreen . fullheight))
@@ -23,6 +25,20 @@
 (global-set-key (kbd "C-S-c C-S-n") 'mc/mark-next-like-this)
 (global-set-key (kbd "C-S-c C-S-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-S-c C-S-a") 'mc/mark-all-like-this)
+
+
+;;; Allows toggling to a terminal buffer with f9
+(defun toggle-term ()
+  "Toggles between terminal and current buffer (creates terminal, if none exists)"
+  (interactive)
+  (if (string= (buffer-name) "*ansi-term*")
+      (switch-to-buffer (other-buffer (current-buffer)))
+    (if (get-buffer "*ansi-term*")
+        (switch-to-buffer "*ansi-term*")
+      (progn
+        (ansi-term (getenv "SHELL"))
+        (setq show-trailing-whitespace nil)))))
+(global-set-key (kbd "<f9>") 'toggle-term)
 
 
 ;;; Simulates vis change inside
