@@ -1,33 +1,9 @@
 ;;; ~/.doom.d/config.el -*- lexical-binding: t; -*-
-(set-face-attribute 'default nil :font "Ubuntu Mono 12")
 
+;;; MOVE TEXT MODE
+(move-text-default-bindings)
 
-(add-to-list 'initial-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(fullscreen . fullheight))
-
-(setq company-idle-delay 0.2
-      company-minimum-prefix-length 3)
-
-;;; Re-define the german umalut keys
-;; (global-set-key "ö" "[")
-;; (global-set-key "ä" "]")
-;; (global-set-key (kbd "C-ö") "{")
-;; (global-set-key (kbd "C-ä") "}")
-;; (global-set-key (kbd "M-ö") "ö")
-;; (global-set-key (kbd "M-ä") "ä")
-
-;; Make dead grave key work for Thinkpad X220 (DE)
-(global-set-key [S-dead-grave] "`")
-
-;;; Configure ultiple cursors mode
-(require 'multiple-cursors)
-(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C-S-c C-S-n") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-S-c C-S-p") 'mc/mark-previous-like-this)
-(global-set-key (kbd "C-S-c C-S-a") 'mc/mark-all-like-this)
-
-
-;;; Allows toggling to a terminal buffer with f9
+;;; ANSI TERMINAL
 (defun toggle-term ()
   "Toggles between terminal and current buffer (creates terminal, if none exists)"
   (interactive)
@@ -41,7 +17,79 @@
 (global-set-key (kbd "<f9>") 'toggle-term)
 
 
-;;; Simulates vis change inside
+(defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  (if (memq (process-status proc) '(signal exit))
+      (let ((buffer (process-buffer proc)))
+        ad-do-it
+        (kill-buffer buffer))
+    ad-do-it))
+(ad-activate 'term-sentinel)
+
+
+(defvar my-term-shell "/bin/bash")
+(defadvice ansi-term (before force-bash)
+  (interactive (list my-term-shell)))
+(ad-activate 'ansi-term)
+
+(defun my-term-use-utf8 ()
+  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+(add-hook 'term-exec-hook 'my-term-use-utf8)
+
+(defun my-term-hook ()
+  (goto-address-mode))
+
+(add-hook 'term-mode-hook 'my-term-hook)
+
+(defun my-term-paste (&optional string)
+ (interactive)
+ (process-send-string
+  (get-buffer-process (current-buffer))
+  (if string string (current-kill 0))))
+
+(defun my-term-hook ()
+  (goto-address-mode)
+  (define-key term-raw-map "\C-y" 'my-term-paste))
+
+;;; NEOTREE
+(global-set-key [f8] 'neotree-toggle)
+
+;;; FULLSCREEN BY DEFAULT
+(add-to-list 'initial-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(fullscreen . fullheight))
+
+(setq company-idle-delay 0.2
+      company-minimum-prefix-length 3)
+
+;;; SNIPPETS
+;; (eval-after-load 'yasnippet
+;;   '(progn
+;;      (define-key yas-keymap (kbd "TAB") nil)
+;;      (define-key yas-keymap (kbd "C-o") 'yas-next-field-or-maybe-expand)))
+
+
+(global-set-key (kbd "C-M-(") 'scroll-down-line)
+(global-set-key (kbd "C-M-)") 'scroll-up-line)
+
+;; (define-key yas-minor-mode-map (kbd "<tab>") nil)
+;; (define-key yas-minor-mode-map (kbd "TAB") nil)
+;; (define-key yas-minor-mode-map (kbd "C-c y") #'yas-expand)
+
+;;; MULTIPLE CURSORS
+(require 'multiple-cursors)
+(global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
+(global-set-key (kbd "C->") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-S-c C-S-a") 'mc/mark-all-like-this)
+
+;;; GERMAN UMLAUTS
+;; (global-set-key "ö" "[")
+;; (global-set-key "ä" "]")
+;; (global-set-key (kbd "C-ö") "{")
+;; (global-set-key (kbd "C-ä") "}")
+;; (global-set-key (kbd "M-ö") "ö")
+;; (global-set-key (kbd "M-ä") "ä")
+
+;;; SIMULATE VIS CHANGE INSIDE
 (require 'expand-region)
 
 (eval-when-compile (require 'cl))
