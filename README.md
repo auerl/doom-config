@@ -1,31 +1,23 @@
-# emacs-config
-My config for the DOOM Emacs distribution on Ubuntu 16.04 and 18.04
+# doom-config
+My config for [doom emacs](https://github.com/hlissner/doom-emacs) for Emacs 27 on Ubuntu 20.04
 
 ## Installation
 
-Install DOOM
+### Install Emacs 27
 
 ```bash
-sudo apt-get install emacs
-git clone -b develop https://github.com/hlissner/doom-emacs ~/.emacs.d
+sudo add-apt-repository ppa:kelleyk/emacs
+sudo apt update
+sudo apt install emacs27
 ```
 
-Setup DOOM
+### Install Doom
 
 ```bash
-~/.emacs.d/bin/doom quickstart
-mkdir ~/.doom.d
-cp init.el config.el ~/.doom.d/
-```
-
-In your .bashrc append
-
-```bash
-em() {
-    fn=`echo "$(cd "$(dirname "$1")"; pwd)/$(basename "$1")"`
-    ~/.emacs.d/bin/doom run $fn
-}
-alias emacs="em"
+git clone --depth 1 https://github.com/hlissner/doom-emacs ~/.emacs.d
+git clone https://github.com/auerl/doom-config ~/.doom.d/
+~/.emacs.d/bin/doom install
+~/.emacs.d/bin/doom sync
 ```
 
 Done!
