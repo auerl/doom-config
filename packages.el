@@ -71,3 +71,4 @@
 (package! org-fancy-priorities)
 (package! origami)
 (package! info-colors)
+(package! jupyter)

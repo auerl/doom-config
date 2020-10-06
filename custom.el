@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(org-agenda-files
-   '("/home/auerl/org/daily/2020-10-15.org" "/home/auerl/org/daily/2020-10-05.org"))
+   '("/home/auerl/org/daily/2020-10-15.org" "/home/auerl/org/daily/2020-10-06.org"))
  '(org-journal-date-format "%A, %d %B %Y")
  '(org-journal-date-prefix "#+TITLE: ")
  '(org-journal-dir "~/org/daily/")
