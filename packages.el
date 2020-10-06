@@ -72,3 +72,4 @@
 (package! origami)
 (package! info-colors)
 (package! jupyter)
+(package! pyenv-mode-auto)
