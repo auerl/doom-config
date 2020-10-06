@@ -28,6 +28,7 @@ For Ubuntu 20.04
 sudo apt install python3-pip
 sudo apt install python-is-python3
 sudo pip install jupyter
+sudo pip install 'python-language-server[all]'
 ```
 
 Done!

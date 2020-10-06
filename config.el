@@ -399,3 +399,12 @@
 (setq org-babel-default-header-args:jupyter-python '((:async . "no")
                                                      (:session . "py")
                                                      (:kernel . "python3")))
+
+;; syntax checker
+(use-package! lsp
+  :init
+  (setq lsp-pyls-plugins-pylint-enabled t)
+  (setq lsp-pyls-plugins-autopep8-enabled nil)
+  (setq lsp-pyls-plugins-yapf-enabled t)
+  (setq lsp-pyls-plugins-pyflakes-enabled nil)
+)
