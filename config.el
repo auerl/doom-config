@@ -386,8 +386,8 @@
 
 (require 'multiple-cursors)
 (global-set-key (kbd "C-S-c C-S-c") 'mc/edit-lines)
-(global-set-key (kbd "C->") 'mc/mark-next-like-this)
-(global-set-key (kbd "C-<") 'mc/mark-previous-like-this)
+(global-set-key (kbd "C-n") 'mc/mark-next-like-this)
+(global-set-key (kbd "C-p") 'mc/mark-previous-like-this)
 (global-set-key (kbd "C-c C-<") 'mc/mark-all-like-this)
 
 
@@ -408,3 +408,7 @@
   (setq lsp-pyls-plugins-yapf-enabled t)
   (setq lsp-pyls-plugins-pyflakes-enabled nil)
 )
+
+;; Block indentation
+(global-set-key (kbd "C->") 'indent-rigidly-right-to-tab-stop)
+(global-set-key (kbd "C-<") 'indent-rigidly-left-to-tab-stop)
